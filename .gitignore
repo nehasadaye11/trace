@@ -1,0 +1,13 @@
+# Local-only files: earlier versions, working references and editor config
+.claude/
+coin-rubbing.html
+coin-rubbing.backup-before-zine.html
+trace-design-reference.webp
+trace-design-reference-v2.webp
+white background.jpg
+DESIGN.md
+
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
