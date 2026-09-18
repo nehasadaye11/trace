@@ -33,7 +33,7 @@
     --app-max: 1000px;
     --gutter: 16px;
     --rs: 0.5;              /* pencil rack scale: the rack photo is 400 x 854 */
-    --bleed: calc(max(0px, (100vw - var(--app-max)) / 2) + var(--gutter));
+    --tail: 90px;           /* how far the pencils run past the rack photo; their cut ends fade into the paper */
   }
 
   * { box-sizing: border-box; }
@@ -83,7 +83,9 @@
   .rack-wrap { position: relative; width: calc(400px * var(--rs)); height: calc(836px * var(--rs)); }
   .rack { position: absolute; left: 0; top: 0; width: calc(400px * var(--rs)); height: calc(836px * var(--rs)); }
   .rack-pencil {
-    position: absolute; right: 0; left: calc(-1 * var(--bleed) - 40px); /* overshoot so a slid-out pencil never shows a gap */
+    position: absolute; right: 0; left: calc(-1 * var(--tail));
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 72px);
+    mask-image: linear-gradient(to right, transparent 0, #000 72px);
     top: calc((var(--top) - 8) * var(--rs) * 1px); height: calc(var(--h) * var(--rs) * 1px);
     padding: 0; border: 0; cursor: pointer;
     background:
@@ -308,7 +310,7 @@
     .style-row select { padding: 6px 12px; }
   }
   @media (max-width: 860px) {
-    :root { --rs: 0.4; --bleed: 0px; }
+    :root { --rs: 0.4; }
     .app { grid-template-columns: minmax(0, 1fr); grid-template-areas: "brand" "intro" "side" "main"; }
     .brand img { width: 150px; margin: 4px auto 0; }
     .credit { margin: 6px 0 0; text-align: center; }
@@ -318,7 +320,7 @@
     .label { font-size: 15px; }
     .rack-wrap { width: calc(836px * var(--rs)); height: calc(400px * var(--rs)); margin: 26px 0 4px; }
     .rack { transform: translateY(calc(400px * var(--rs))) rotate(-90deg); transform-origin: 0 0; }
-    .rack-pencil { left: -24px; } /* body runs past the row's foot so a lifted pencil leaves no gap */
+    .rack-pencil { left: -24px; -webkit-mask-image: none; mask-image: none; } /* body runs past the row's foot so a lifted pencil leaves no gap */
     .rack-wrap { clip-path: inset(-40px -40px 0 -40px); } /* clip only the foot; the lifted tip may rise above */
     .rack-meta { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; margin: 16px 0 22px; }
     .message-section > .toggle-wrap { display: flex; justify-content: space-between; }
